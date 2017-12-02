@@ -66,7 +66,7 @@ public class HoneyBox : MonoBehaviour
 
 
 				var bee = Instantiate(_bee);
-				bee.transform.position = new Vector3(transform.position.x, transform.position.y, bee.transform.position.z);
+				bee.transform.position =  new Vector3(transform.position.x, transform.position.y, bee.transform.position.z);
 				bee.GetComponent<Bee>().Target = _player;
 				_player.Bees.Add(bee.GetComponent<Bee>());
 				_player.AddScore();

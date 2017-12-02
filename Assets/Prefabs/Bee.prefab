@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4708844431732456}
   - component: {fileID: 50357039906145632}
-  - component: {fileID: 58384393706997790}
   - component: {fileID: 58377342777787920}
   - component: {fileID: 114241497152517940}
   - component: {fileID: 33009745105644480}
@@ -122,21 +121,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!58 &58384393706997790
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1575977505799546}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 12
 --- !u!96 &96102258158402290
 TrailRenderer:
   serializedVersion: 2
@@ -244,5 +228,10 @@ MonoBehaviour:
   _speed: 3
   _waitInterval: 3
   _attackSpeed: 9
-  _attackDuration: 1
+  _attackDuration: 1.5
+  _attackRadius: 3
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  attackPlayer: 0
   Target: {fileID: 0}

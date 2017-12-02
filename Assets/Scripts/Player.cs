@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -8,34 +9,35 @@ public class Player : MonoBehaviour
 
 	[SerializeField] private int _maxHp;
 	[SerializeField] private int _currentHp;
+	public Text PlayerScoreText;
 
 	public List<Bee> Bees;
 	public int Score;
 	private InterfaceController _interfaceController;
 	private PlayerManager _playerManager;
 
+	private void Awake()
+	{
+		_interfaceController = FindObjectOfType<InterfaceController>();
+	}
 
 	private void OnEnable()
 	{
 		_currentHp = _maxHp;
 		Score = 0;
-		_interfaceController = FindObjectOfType<InterfaceController>();
-		_interfaceController.UpdateText(InstanceNumber, Score);
 	}
 
 	private void Start()
 	{
 		_playerManager = GetComponentInParent<PlayerManager>();
-		_interfaceController = FindObjectOfType<InterfaceController>();
 		_currentHp = _maxHp;
 		Score = 0;
-		_interfaceController.UpdateText(InstanceNumber, Score);
 	}
 
 	public void AddScore()
 	{
 		Score++;
-		_interfaceController.UpdateText(InstanceNumber, Score);
+		PlayerScoreText.text = Score.ToString();
 	}
 
 	public void AddDamage()
@@ -45,17 +47,32 @@ public class Player : MonoBehaviour
 		{
 			var topPlayer = _playerManager.GetTopPlayer(this);
 
+
+
+
+
+			List<Bee> tempList = new List<Bee>();
+
+
+			tempList = Bees;
+
 			if (topPlayer != this)
 			{
-				foreach (Bee bee in Bees)
+				Bees = new List<Bee>();
+
+				foreach (Bee bee in tempList)
 				{
-					Bees.Remove(bee);
-					topPlayer.Bees.Add(bee);
 					bee.Target = topPlayer;
 				}
+
+				topPlayer.Bees.AddRange(tempList);
 			}
 
+			_interfaceController.TopPlayer.text = topPlayer.gameObject.name;
+
 			_playerManager.PlayerIsDead(gameObject);
+			Score = 0;
+			PlayerScoreText.text = Score.ToString();
 			gameObject.SetActive(false);
 		}
 	}

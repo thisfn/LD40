@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1751582022018580
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 1396899866209504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 4528985807917494}
   m_RootOrder: 0
@@ -222,11 +222,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _attackCollider: {fileID: 58093110226128816}
-  _normalCollider: {fileID: 58971917005733896}
-  _colliderDuration: 0.1
-  _cooldownDuration: 3
+  _colliderDuration: 2
+  _cooldownDuration: 5
   _sphere: {fileID: 1396899866209504}
-  _normalColliderTimer: 1
+  IsShielded: 0
 --- !u!114 &114225644512832778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,5 +241,6 @@ MonoBehaviour:
   InstanceNumber: 0
   _maxHp: 3
   _currentHp: 0
+  PlayerScoreText: {fileID: 0}
   Bees: []
   Score: 0

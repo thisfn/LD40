@@ -9,13 +9,20 @@ public class PlayerManager : MonoBehaviour
 	[SerializeField] private bool[] _playersInGame;
 	[SerializeField] private float _respawnDelay;
 
-	private Transform[] _respawns;
+	InterfaceController _interfaceController;
 
-	public static int PlayerCount;
+	private List<Transform> _respawns;
+
+	[SerializeField] public static int PlayerCount;
 
 	private void Start()
 	{
-		_respawns = GetComponentsInChildren<Transform>();
+		_respawns = new List<Transform>();
+		_interfaceController = FindObjectOfType<InterfaceController>();
+		foreach (Transform child in transform)
+		{
+			_respawns.Add(child);
+		}
 	}
 
 	private void Update()
@@ -38,9 +45,11 @@ public class PlayerManager : MonoBehaviour
 		{
 			if (!_playersInGame[position])
 			{
-				var go = Instantiate(_player, _respawns[Random.Range(0, _respawns.Length)].position, Quaternion.identity, transform);
+				var go = Instantiate(_player, _respawns[Random.Range(0, _respawns.Count)].position, Quaternion.identity, transform);
+				go.name = "Player " + (PlayerCount + 1);
 				go.GetComponent<Player>().Id = position;
 				go.GetComponent<Player>().InstanceNumber = PlayerCount;
+				go.GetComponent<Player>().PlayerScoreText = _interfaceController.Texts[PlayerCount];
 				go.GetComponent<MeshRenderer>().material = _materials[PlayerCount]; //Todo Change sprite color
 				PlayerCount++;
 				_playersInGame[position] = true;
@@ -59,10 +68,9 @@ public class PlayerManager : MonoBehaviour
 		yield return new WaitForSeconds(_respawnDelay);
 
 		pgo.SetActive(true);
-		pgo.transform.position = _respawns[Random.Range(0, _respawns.Length)].position;
+		pgo.transform.position = _respawns[Random.Range(0, _respawns.Count)].position;
 		pgo.transform.parent = transform;
 	}
-
 
 	public Player GetTopPlayer(Player playerDying)
 	{
@@ -81,7 +89,8 @@ public class PlayerManager : MonoBehaviour
 			}
 		}
 
-		if (PlayerCount == 1)
+		//Todo enrique vai fazer a expansao de dividir as abelhas entre o empate
+		if (PlayerCount == 1 || topPlayer.Score == 0)
 		{
 			topPlayer = playerDying;
 		}
