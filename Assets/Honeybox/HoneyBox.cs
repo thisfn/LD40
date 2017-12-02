@@ -6,12 +6,15 @@ public class HoneyBox : MonoBehaviour
 	[SerializeField] private float _creationTime;
 	[SerializeField] private float _creationCounter;
 	[SerializeField] private float _collectCounter;
+	[SerializeField] private GameObject _honeyHolder;
 
 	[SerializeField] private bool _hasHoney;
 	[SerializeField] private bool _onCollect;
 
 	private void Update()
 	{
+		_honeyHolder.SetActive(_hasHoney);
+
 		if (!_hasHoney)
 		{
 			_creationCounter += Time.deltaTime;

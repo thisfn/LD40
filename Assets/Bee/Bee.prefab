@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4947948287818784}
   - component: {fileID: 114914611154074802}
+  - component: {fileID: 95486546148243936}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Untagged
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085101236191090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4642614930335668}
@@ -119,7 +120,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350168682237790}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -138,6 +139,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &95486546148243936
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085101236191090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3eda4d1c032bb5e4abaf2d455ba52c3a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114914611154074802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,12 +164,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1085101236191090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec00484708cb4e659643435c9d199b5f, type: 3}
+  m_Script: {fileID: 11500000, guid: ad9fd87d5b8e40d794fff98e5a6993fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _sightRadius: 3
-  _attackRadius: 1
+  _attackSpeed: 9
+  _sightRadius: 5
+  _attackRadius: 2
   _playerMask:
     serializedVersion: 2
     m_Bits: 256
