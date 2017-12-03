@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour
 
 	public static void DefineWinner(GameObject player)
 	{
+		WinAmount = 12;
 		WinnerMat = player.GetComponentInChildren<SpriteRenderer>().material;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
