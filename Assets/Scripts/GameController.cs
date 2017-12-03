@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-	public static int WinAmount = 10;
+	public static int WinAmount = 12;
 	public static Material WinnerMat;
 	[SerializeField] private int _loweringFactor = 1;
 	[SerializeField] private int _beeAmountToChange = 10;
@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
+		WinAmount = 12;
 		_playerManager = FindObjectOfType<PlayerManager>();
 		_interfaceController = FindObjectOfType<InterfaceController>();
 		_interfaceController.winAmountText.text = WinAmount.ToString();
@@ -41,11 +42,6 @@ public class GameController : MonoBehaviour
 			default:
 				_beeAmountToChange = 10;
 				break;
-		}
-
-		if (Input.GetKeyDown(KeyCode.Y))
-		{
-			_interfaceController.winAmountText.text = "Yaho";
 		}
 
 		if (HoneyBox.BeeCounter / _beeAmountToChange > _counter)
