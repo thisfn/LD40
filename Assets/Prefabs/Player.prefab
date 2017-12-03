@@ -220,6 +220,8 @@ MonoBehaviour:
   _shield: {fileID: 1987904170778480}
   IsShielded: 0
   isMoving: 0
+  DashDuration: 0.1
+  DashPower: 1000
 --- !u!114 &114225644512832778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,8 +242,6 @@ MonoBehaviour:
   Bees: []
   HoneyPerSecond: 0
   TotalScore: 0
-  NewScore: 0
-  auxScore: 0
 --- !u!212 &212260114837031378
 SpriteRenderer:
   m_ObjectHideFlags: 1

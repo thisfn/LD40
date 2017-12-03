@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 222662393570581058}
   - component: {fileID: 114873098833731274}
   m_Layer: 5
-  m_Name: Top Player
+  m_Name: Win Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   - {fileID: 114545289049538356}
   - {fileID: 114664574586451168}
   - {fileID: 114363314812243420}
-  TopPlayer: {fileID: 114873098833731274}
+  winAmountText: {fileID: 114873098833731274}
 --- !u!114 &114873098833731274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99215686, g: 0.85882354, b: 0.12156863, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -520,7 +520,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 354da5d9055d6284789792b3cc63d026, type: 3}
-    m_FontSize: 16
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -531,7 +531,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: TOP PLAYER
+  m_Text: 
 --- !u!222 &222202889217298692
 CanvasRenderer:
   m_ObjectHideFlags: 1

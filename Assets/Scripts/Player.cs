@@ -33,11 +33,16 @@ public class Player : MonoBehaviour
 		PlayerScoreText.text = TotalScore.ToString();
 	}
 
-	public void AddScore()
+	public void AddScore(int value)
 	{
-		TotalScore++;
+		TotalScore += value;
 		PlayerScoreText.text = TotalScore.ToString();
-		_playerManager.GetTopPlayer(this);
+		if (TotalScore >= GameController.WinAmount)
+		{
+			GameController.DefineWinner(gameObject);
+		}
+
+		_playerManager.GetTopPlayer();
 	}
 
 	public void AddDamage()
@@ -46,7 +51,7 @@ public class Player : MonoBehaviour
 		if (_currentHp <= 0)
 		{
 			TotalScore = 0;
-			var topPlayer = _playerManager.GetTopPlayer(this);
+			var topPlayer = _playerManager.GetTopPlayer();
 			List<Bee> tempList = new List<Bee>();
 
 			tempList = Bees;

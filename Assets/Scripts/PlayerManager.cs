@@ -57,7 +57,6 @@ public class PlayerManager : MonoBehaviour
 		}
 	}
 
-
 	public void PlayerIsDead(GameObject playerGo)
 	{
 		StartCoroutine(ReCreate(playerGo));
@@ -73,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 		pgo.transform.parent = transform;
 	}
 
-	public Player GetTopPlayer(Player thisPlayer)
+	public Player GetTopPlayer()
 	{
 		Player topPlayer = GetComponentInChildren<Player>();
 		Player[] players = GetComponentsInChildren<Player>();
@@ -90,40 +89,11 @@ public class PlayerManager : MonoBehaviour
 			}
 		}
 
-		if (PlayerCount == 1)
-		{
-			topPlayer = thisPlayer;
-		}
-
 		if (topPlayer.TotalScore > 0)
 		{
 			if (topPlayer.Crown != null)
 				topPlayer.Crown.SetActive(true);
 		}
-
-		string playerName;
-
-		switch (topPlayer.InstanceNumber)
-		{
-			case 0:
-				playerName = "Orange";
-				break;
-			case 1:
-				playerName = "Green";
-				break;
-			case 2:
-				playerName = "Blue";
-				break;
-			case 3:
-				playerName = "Pink";
-				break;
-			default:
-				playerName = "Deupau";
-				break;
-		}
-
-		_interfaceController.TopPlayer.text = playerName;
-
 		return topPlayer;
 	}
 }

@@ -8,6 +8,13 @@ public class TimerCount : MonoBehaviour
 	public Text timerText;
 	public int timerMin;
 	public int timerSeg;
+	PlayerManager playerManager;
+
+	private void Start()
+	{
+		playerManager = FindObjectOfType<PlayerManager>();
+	}
+
 	private void Update()
 	{
 		if (timerRestante > 0)
@@ -16,8 +23,7 @@ public class TimerCount : MonoBehaviour
 		}
 		else
 		{
-			SceneManager.LoadScene(0);//TODO ENRIQUE ADICIONA BEEHOLDER/TELA DE VITORIA
-			//add Beeholder!!!
+			GameController.DefineWinner(playerManager.GetTopPlayer().gameObject);
 		}
 		timerMin = (int) (timerRestante / 60f);
 		timerSeg = (int) (timerRestante % 60f);

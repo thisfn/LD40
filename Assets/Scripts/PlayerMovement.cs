@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
 	private float _cooldownCounter;
 	public bool IsShielded;
 	public bool isMoving;
+	
+	public float DashDuration;
+	private float _dashDurationCounter;
+	public int DashPower;
+	private bool _isDashing;
 
 	private SpriteRenderer _spriteRenderer;
 	private Animator _anim;
@@ -53,10 +58,12 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		_anim.SetBool("isMoving", isMoving);
+		_anim.SetBool("isDashing", _isDashing);
 
 		var moveVector = new Vector2(_horizontal, _vertical).normalized;
 
-		_rb.velocity = moveVector * _speed;
+		if (!_isDashing)
+			_rb.velocity = moveVector * _speed;
 
 		_cooldownCounter -= Time.deltaTime;
 		_colliderCounter -= Time.deltaTime;
@@ -68,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
 			IsShielded = false;
 			_rb.mass = 1;
 		}
-
 
 		if (Input.GetButtonDown(("F" + _player.Id)))
 		{
@@ -82,6 +88,28 @@ public class PlayerMovement : MonoBehaviour
 				_cooldownCounter = _cooldownDuration;
 				_colliderCounter = _colliderDuration;
 			}
+		}
+
+		if (Input.GetButtonDown(("D" + _player.Id)))
+		{
+			if (_dashDurationCounter <= 0 && isMoving && _player.TotalScore > 0)
+			{
+				var vecDash = new Vector2(_horizontal, _vertical).normalized * DashPower *_rb.mass;
+				_dashDurationCounter = DashDuration;
+				_rb.AddForce(vecDash);
+				_player.AddScore(-1);
+				_isDashing=true;
+			}
+		}
+
+
+		if (_dashDurationCounter > 0)
+		{
+			_dashDurationCounter -= Time.deltaTime;
+		}
+		else
+		{
+			_isDashing =false;
 		}
 	}
 

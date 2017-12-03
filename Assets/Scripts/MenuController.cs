@@ -14,4 +14,10 @@ public class MenuController : MonoBehaviour
 	{
 		Application.Quit();
 	}
+
+	public void LoadMenu()
+	{
+		PlayerManager.PlayerCount = 0;
+		SceneManager.LoadScene(0);
+	}
 }
