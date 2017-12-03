@@ -135,5 +135,4 @@ MonoBehaviour:
   songs:
   - {fileID: 8300000, guid: d53681a66d36d914f95b8c7ee118cdef, type: 3}
   - {fileID: 8300000, guid: 3fe90a2a40ff85c4a8ad920b9327ffcc, type: 3}
-  - {fileID: 8300000, guid: 16190fd5bce6ca442b3c26dde5d7cd1a, type: 3}
   - {fileID: 8300000, guid: 3b3d5063bbd82c84bb4c4979f7b7b1b6, type: 3}
