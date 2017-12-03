@@ -9,9 +9,13 @@ public class Bee : MonoBehaviour
 	[SerializeField] private float _attackDuration;
 	[SerializeField] private float _attackRadius = 12f;
 	[SerializeField] private LayerMask _playerMask;
+	[SerializeField] private float _hitTimer;
+	private float _hitCounter;
 	private float _attackCounter;
 	public bool attackPlayer;
 	private bool _isAttacking;
+
+	private SpriteRenderer _spriteRenderer;
 
 	[HideInInspector] public Player Target;
 
@@ -21,6 +25,7 @@ public class Bee : MonoBehaviour
 
 	private void Start()
 	{
+		_spriteRenderer = GetComponent<SpriteRenderer>();
 		_rb = GetComponent<Rigidbody2D>();
 		_rb.velocity = Vector2.zero;
 	}
@@ -31,6 +36,8 @@ public class Bee : MonoBehaviour
 		_waitInterval -= Time.deltaTime;
 		if (_waitInterval < 0f)
 		{
+
+			_hitCounter -= Time.deltaTime;
 			attackPlayer = Physics2D.OverlapCircle(transform.position, _attackRadius, _playerMask);
 
 			if (attackPlayer && !_isAttacking)
@@ -42,6 +49,8 @@ public class Bee : MonoBehaviour
 			if (_attackCounter < 0f)
 			{
 				_rb.velocity = Vector2.zero;
+
+				_spriteRenderer.flipX = (Target.transform.position - transform.position).x >= 0f;
 				transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, _speed * Time.deltaTime);
 				_isAttacking = false;
 			}
@@ -60,7 +69,11 @@ public class Bee : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Player") && !collision.gameObject.GetComponent<PlayerMovement>().IsShielded)
 		{
-			collision.gameObject.GetComponent<Player>().AddDamage();
+			if (_hitCounter < 0f)
+			{
+				collision.gameObject.GetComponent<Player>().AddDamage();
+				_hitCounter = _hitTimer;
+			}
 		}
 	}
 

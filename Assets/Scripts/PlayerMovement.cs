@@ -8,17 +8,23 @@ public class PlayerMovement : MonoBehaviour
 	private float _horizontal, _vertical;
 	[SerializeField] private float _colliderDuration;
 	[SerializeField] private float _cooldownDuration;
-	[SerializeField] private GameObject _sphere;
+	[Tooltip("NAO DEIXA ESSA PORRA ATIVA")][SerializeField] private GameObject _shield;
 	private float _colliderCounter;
 	private float _cooldownCounter;
 	public bool IsShielded;
+	public bool isMoving;
 
+	private SpriteRenderer _spriteRenderer;
+	private Animator _anim;
 	private Rigidbody2D _rb;
 	private Player _player;
 
 	private void Awake()
 	{
+		_shield.SetActive(false);
+		_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		_rb = GetComponent<Rigidbody2D>();
+		_anim = GetComponent<Animator>();
 		_player = GetComponent<Player>();
 	}
 
@@ -27,6 +33,26 @@ public class PlayerMovement : MonoBehaviour
 		_horizontal = Input.GetAxisRaw("H" + _player.Id);
 		_vertical = Input.GetAxisRaw("V" + _player.Id);
 
+
+		if (_horizontal > 0)
+		{
+			_spriteRenderer.flipX = false;
+		}
+		else if (_horizontal < 0)
+		{
+			_spriteRenderer.flipX = true;
+		}
+
+		if (Mathf.Abs(_horizontal) > 0 || Mathf.Abs(_vertical) > 0)
+		{
+			isMoving = true;
+		}
+		else
+		{
+			isMoving = false;
+		}
+
+		_anim.SetBool("isMoving", isMoving);
 
 		var moveVector = new Vector2(_horizontal, _vertical).normalized;
 
@@ -38,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 		if (_colliderCounter < 0f)
 		{
 			_attackCollider.enabled = false;
-			_sphere.SetActive(false);
+			_shield.SetActive(false);
 			IsShielded = false;
 			_rb.mass = 1;
 		}
@@ -49,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 			if (_cooldownCounter < 0f)
 			{
 				_attackCollider.enabled = true;
-				_sphere.SetActive(true);
+				_shield.SetActive(true);
 				_rb.mass = 100;
 				IsShielded = true;
 
@@ -57,5 +83,16 @@ public class PlayerMovement : MonoBehaviour
 				_colliderCounter = _colliderDuration;
 			}
 		}
+	}
+
+	public void ShieldOnRespawn()
+	{
+		_attackCollider.enabled = true;
+		_shield.SetActive(true);
+		_rb.mass = 100;
+		IsShielded = true;
+
+		_cooldownCounter = _cooldownDuration;
+		_colliderCounter = _colliderDuration;
 	}
 }

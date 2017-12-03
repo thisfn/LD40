@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 				go.GetComponent<Player>().Id = position;
 				go.GetComponent<Player>().InstanceNumber = PlayerCount;
 				go.GetComponent<Player>().PlayerScoreText = _interfaceController.Texts[PlayerCount];
-				go.GetComponent<MeshRenderer>().material = _materials[PlayerCount]; //Todo Change sprite color
+				go.GetComponentInChildren<SpriteRenderer>().material = _materials[PlayerCount];
 				PlayerCount++;
 				_playersInGame[position] = true;
 			}
@@ -68,6 +68,7 @@ public class PlayerManager : MonoBehaviour
 		yield return new WaitForSeconds(_respawnDelay);
 
 		pgo.SetActive(true);
+		pgo.GetComponent<PlayerMovement>().ShieldOnRespawn();
 		pgo.transform.position = _respawns[Random.Range(0, _respawns.Count)].position;
 		pgo.transform.parent = transform;
 	}
@@ -83,14 +84,14 @@ public class PlayerManager : MonoBehaviour
 			if (player == playerDying)
 				continue;
 
-			if (player.Score > topPlayer.Score)
+			if (player.TotalScore > topPlayer.TotalScore)
 			{
 				topPlayer = player;
 			}
 		}
 
 		//Todo enrique vai fazer a expansao de dividir as abelhas entre o empate
-		if (PlayerCount == 1 || topPlayer.Score == 0)
+		if (PlayerCount == 1 || topPlayer.TotalScore == 0)
 		{
 			topPlayer = playerDying;
 		}

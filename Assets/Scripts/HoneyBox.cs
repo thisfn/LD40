@@ -8,11 +8,13 @@ public class HoneyBox : MonoBehaviour
 	private float _honeyCounter;
 	private float _collectCounter;
 
-	[SerializeField] private GameObject _honeyPlaceholder;
 
-	//[SerializeField] private Sprite _empty;
-	//[SerializeField] private Sprite _full;
-	//private SpriteRenderer _spriteRenderer;
+	public static int BeeCounter;
+
+
+	[SerializeField] private Sprite _empty;
+	[SerializeField] public Sprite _full;
+	public SpriteRenderer _spriteRenderer;
 
 	[SerializeField] private GameObject _bee;
 
@@ -22,7 +24,7 @@ public class HoneyBox : MonoBehaviour
 
 	private void Start()
 	{
-		//_spriteRenderer = GetComponent<SpriteRenderer>();
+		_spriteRenderer = GetComponent<SpriteRenderer>();
 		_honeyTime = Random.Range(_honeyTime, _honeyTime * 2f);
 	}
 
@@ -44,8 +46,7 @@ public class HoneyBox : MonoBehaviour
 		{
 			_hasHoney = true;
 			_honeyCounter = 0;
-			_honeyPlaceholder.SetActive(true);
-			//_spriteRenderer.sprite = _full;
+			_spriteRenderer.sprite = _full;
 		}
 	}
 
@@ -61,11 +62,11 @@ public class HoneyBox : MonoBehaviour
 				_collectCounter = 0;
 				_isCollecting = false;
 				_hasHoney = false;
-				_honeyPlaceholder.SetActive(false);
-				//_spriteRenderer.sprite = _empty;
+				_spriteRenderer.sprite = _empty;
 
 
 				var bee = Instantiate(_bee);
+				BeeCounter++;
 				bee.transform.position =  new Vector3(transform.position.x, transform.position.y, bee.transform.position.z);
 				bee.GetComponent<Bee>().Target = _player;
 				_player.Bees.Add(bee.GetComponent<Bee>());
