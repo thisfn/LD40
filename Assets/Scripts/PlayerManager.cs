@@ -73,7 +73,7 @@ public class PlayerManager : MonoBehaviour
 		pgo.transform.parent = transform;
 	}
 
-	public Player GetTopPlayer(Player playerDying)
+	public Player GetTopPlayer(Player thisPlayer)
 	{
 		GameObject temp = new GameObject();
 		Player topPlayer = temp.gameObject.AddComponent<Player>();
@@ -81,8 +81,8 @@ public class PlayerManager : MonoBehaviour
 
 		foreach (var player in players)
 		{
-			if (player == playerDying)
-				continue;
+			if (player.Crown != null)
+				player.Crown.SetActive(false);
 
 			if (player.TotalScore > topPlayer.TotalScore)
 			{
@@ -90,14 +90,42 @@ public class PlayerManager : MonoBehaviour
 			}
 		}
 
-		//Todo enrique vai fazer a expansao de dividir as abelhas entre o empate
-		if (PlayerCount == 1 || topPlayer.TotalScore == 0)
+		if (PlayerCount == 1)
 		{
-			topPlayer = playerDying;
+			topPlayer = thisPlayer;
+		}
+
+		Destroy(temp);
+
+		if (topPlayer.TotalScore > 0)
+		{
+			if (topPlayer.Crown != null)
+				topPlayer.Crown.SetActive(true);
 		}
 
 
-		Destroy(temp);
+		string playerName;
+
+		switch (topPlayer.InstanceNumber)
+		{
+			case 0:
+				playerName = "Orange";
+				break;
+			case 1:
+				playerName = "Green";
+				break;
+			case 2:
+				playerName = "Blue";
+				break;
+			case 3:
+				playerName = "Pink";
+				break;
+			default:
+				playerName = "Deupau";
+				break;
+		}
+
+		_interfaceController.TopPlayer.text = playerName;
 
 		return topPlayer;
 	}
