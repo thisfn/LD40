@@ -75,12 +75,12 @@ public class PlayerManager : MonoBehaviour
 
 	public Player GetTopPlayer(Player thisPlayer)
 	{
-		GameObject temp = new GameObject();
-		Player topPlayer = temp.gameObject.AddComponent<Player>();
+		Player topPlayer = GetComponentInChildren<Player>();
 		Player[] players = GetComponentsInChildren<Player>();
 
 		foreach (var player in players)
 		{
+
 			if (player.Crown != null)
 				player.Crown.SetActive(false);
 
@@ -95,14 +95,11 @@ public class PlayerManager : MonoBehaviour
 			topPlayer = thisPlayer;
 		}
 
-		Destroy(temp);
-
 		if (topPlayer.TotalScore > 0)
 		{
 			if (topPlayer.Crown != null)
 				topPlayer.Crown.SetActive(true);
 		}
-
 
 		string playerName;
 
