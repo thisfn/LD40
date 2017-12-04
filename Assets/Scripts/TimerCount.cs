@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class TimerCount : MonoBehaviour
 {
@@ -9,10 +8,12 @@ public class TimerCount : MonoBehaviour
 	public int timerMin;
 	public int timerSeg;
 	PlayerManager playerManager;
+	GameController _gameController;
 
 	private void Start()
 	{
 		playerManager = FindObjectOfType<PlayerManager>();
+		_gameController = FindObjectOfType<GameController>();
 	}
 
 	private void Update()
@@ -23,7 +24,7 @@ public class TimerCount : MonoBehaviour
 		}
 		else
 		{
-			GameController.DefineWinner(playerManager.GetTopPlayer().gameObject);
+			_gameController.DefineWinner(playerManager.GetTopPlayer().gameObject);
 		}
 		timerMin = (int) (timerRestante / 60f);
 		timerSeg = (int) (timerRestante % 60f);

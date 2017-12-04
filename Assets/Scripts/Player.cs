@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	public int HoneyPerSecond;
 	public int TotalScore;
 	private PlayerManager _playerManager;
+	private GameController _gameController;
 
 	private void OnEnable()
 	{
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
+		_gameController = FindObjectOfType<GameController>();
 		_playerManager = GetComponentInParent<PlayerManager>();
 		_currentHp = _maxHp;
 		TotalScore = 0;
@@ -37,9 +39,9 @@ public class Player : MonoBehaviour
 	{
 		TotalScore += value;
 		PlayerScoreText.text = TotalScore.ToString();
-		if (TotalScore >= GameController.WinAmount)
+		if (TotalScore >= _gameController.WinAmount)
 		{
-			GameController.DefineWinner(gameObject);
+			_gameController.DefineWinner(gameObject);
 		}
 
 		_playerManager.GetTopPlayer();

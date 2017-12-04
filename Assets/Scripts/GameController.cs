@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-	public static int WinAmount = 12;
+	public int WinAmount = 12;
 	public static Material WinnerMat;
 	[SerializeField] private int _loweringFactor = 1;
 	[SerializeField] private int _beeAmountToChange = 10;
@@ -15,6 +14,7 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
+		_counter = 0;
 		WinAmount = 12;
 		_playerManager = FindObjectOfType<PlayerManager>();
 		_interfaceController = FindObjectOfType<InterfaceController>();
@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public static void DefineWinner(GameObject player)
+	public void DefineWinner(GameObject player)
 	{
 		WinAmount = 12;
 		WinnerMat = player.GetComponentInChildren<SpriteRenderer>().material;

@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 61324380607524196}
   - component: {fileID: 61398211314565778}
   - component: {fileID: 114864113267321712}
-  - component: {fileID: 212821266782989428}
+  - component: {fileID: 212258013282176110}
   m_Layer: 10
   m_Name: HoneyBox
   m_TagString: Untagged
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263607245969604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4289925843986314}
@@ -209,9 +209,9 @@ MonoBehaviour:
   _collectTime: 0.5
   _empty: {fileID: 21300000, guid: 0c796c0e05d927d459e5b37e858d0669, type: 3}
   _full: {fileID: 21300000, guid: c10a5284f77951a4ea65c6f11d940d01, type: 3}
-  _spriteRenderer: {fileID: 0}
+  _spriteRenderer: {fileID: 212258013282176110}
   _bee: {fileID: 1575977505799546, guid: 2d55b35b362a9a744aade8e15ef1ae42, type: 2}
---- !u!212 &212821266782989428
+--- !u!212 &212258013282176110
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
